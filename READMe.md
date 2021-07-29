@@ -1,65 +1,22 @@
-# Multi Machine automated deployment
-
-## Sparta Node Sample App
-
-## Description
-
-This app is intended for use with the Sparta Global Devops Stream as a sample app. You can clone the repo and use it as is but no changes will be accepted on this branch. 
-
-To use the repo within your course you should fork it.
-
-The app is a node app with three pages.
-- trigger webhook
-### Homepage
-
-``localhost:3000``
-
-Displays a simple homepage displaying a Sparta logo and message. This page should return a 200 response.
-
-### Blog
-
-``localhost:3000/posts``
-
-This page displays a logo and 100 randomly generated blog posts. The posts are generated during the seeding step.
-
-This page and the seeding is only accessible when a database is available and the DB_HOST environment variable has been set with it's location.
-
-### A fibonacci number generator
-
-``localhost:3000/fibonacci/{index}``
-
-This page has be implemented poorly on purpose to produce a slow running function. This can be used for performance testing and crash recovery testing.
-
-The higher the fibonacci number requested the longer the request will take. A very large number can crash or block the process.
-
-
-### Hackable code
-
-``localhost:3000/hack/{code}``
-
-There is a commented route that opens a serious security vulnerability. This should only be enabled when looking at user security and then disabled immediately afterwards
-
-## Usage
-
-Clone the app
-
-```
-npm install
-npm start
-```
-
-You can then access the app on port 3000 at one of the urls given above.
-
-## Tests
-
-There is a basic test framework available that uses the Mocha/Chai framework
-
-```
-npm test
-```
-
-The test for posts will fail ( as expected ) if the database has not been correctly setup.
-
-
-
-
+# Creating a Jenkins project and pipeline
+## Logging into Jenkins
+- Go to [this link](http://35.176.10.123:8080)
+- Login using username: `devopslondon`
+- Password: `DevopsAdmin`
+## Creating a Jenkins project
+- On the Jenkins dashboard, click `New Item` found in the top right
+- Name the project appropiately and select `Freestyle Project`
+- Add a suitable description (Optional)
+- Tick the `Discard old builds box` and add `3` under `Max # of builds to keep`. This is to stop unwanted builds from clogging Jenkins
+- Under `Build`, click `Add Build step` and select `Execute shell`
+- Here, we can add any linux based command. For simplicity, add `uname -a`
+- Apply and save the build.
+- Now the project can be built by pressing the `Build Now` button or alternatively by right clicking the project on the dashboard]\
+## Creating a Jenkins pipeline
+- We can create a pipeline to build when the project completes
+- Follow the same steps to create a project and add a suitable 'Build step'
+- Navigate back to the original project and select `Configure`
+- This allows the project to be re-configured when necessary
+- For this, scroll down to the bottom and add a new `post-build action`
+- Select `Build another project`
+- And select the new project.
